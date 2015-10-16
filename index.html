@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<style>
+    #year {
+        font-size: 2em;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        padding: 5px;
+        border: solid 3px gray
+    }
+</style>
+<body>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="datamaps.usa.min.js"></script>
+<div id="year"></div>
+<div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
+<script>
+var year = 1787;
+var States;
+var ref = new Firebase('https://statesdata.firebaseio.com');
+ref.on('value', function(data) {
+  States = data.val();
+  dataViz(States)}, function (e) {
+  console.log("The read failed: " + e.code);
+});
+
+var map = new Datamap({
+    element: document.getElementById('container'),
+    scope: 'usa'
+});
+
+map.labels({"labelColor": "#444"});
+
+var dataViz = function(data) {
+    d3.select("#year").html(year);
+    for (var i = 0; i < States.length; i++) {
+        if (States[i].Admitted <= year) {
+            var abbr = States[i].Abbr;
+            var selector = "path." + abbr;
+            d3.select(selector).style("fill", "red");
+        }
+    }
+};
+</script>
+</body>
+</html>
