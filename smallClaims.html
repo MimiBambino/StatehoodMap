@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<style>
+    #year {
+        font-size: 2em;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        padding: 5px;
+        border: solid 3px gray;
+    }
+    /*path.datamaps-subunit*/
+    .grey {
+        fill: rgb(231,235,237);
+    }
+    .hoverinfo {
+
+    }
+
+</style>
+<body>
+  <!-- Load Firebase, D3.js, topojson and Map script -->
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="datamaps.usa.min.js"></script>
+<div class="map" id="map_election" style="position: relative; width: 1000px; height: 600px;"></div>
+<script>
+// Declare global variables.
+var election = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('map_election'),
+  geographyConfig: {
+    highlightBorderColor: '#EEF4D9',
+    highlightFillColor: '#1F1CE3',
+    popupOnHover: false,
+    popupTemplate: function(geography, data) {
+      return '<div class="hoverinfo">' + geography.properties.name + '<br>Small Claims Limit: ' +  data.limit + '<br><a href="' + data.url + '">Court Info</a>';
+},
+    highlightBorderWidth: 3
+  },
+
+  fills: {
+  defaultFill: '#81C76E'
+},
+ done: function(datamap) {
+        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+      var m = {};
+      m[geography.id] = '#000000';
+      datamap.updateChoropleth(m);
+        });
+    },
+data:{
+  "AL": {
+      "limit": "$3,000",
+      "url": "http://www.alabamalegalhelp.org/"
+  },
+  "AK": {
+      "limit": "$10,000",
+      "url": "http://www.state.ak.us/courts/forms/sc-100.pdf"
+  },
+  "AZ": {
+      "limit": "$3,500",
+      "url": "https://www.azcourts.gov/selfservicecenter/Self-Service-Forms#SmallClaims",
+      "more": "http://www.jp.pima.gov/Pages/SmallClaims/NewSmallClaim/"
+  },
+  "AR": {
+      "limit": "$5,000",
+      "url": "http://www.nolo.com/legal-encyclopedia/small-claims-suits-how-much-30031.html"
+  },
+  "CA": {
+      "limit": "$10,000",
+      "url": "http://www.courtinfo.ca.gov/selfhelp/smallclaims/#geninfo.htm"
+  },
+  "CO": {
+      "limit": "$7,500",
+      "url": "http://www.courts.state.co.us/userfiles/file/Self_Help/smallclaimshandbook%20finaltocourt%204-11.pdf"
+  },
+  "CT": {
+      "limit": "$5,000",
+      "url": "http://www.jud.state.ct.us/faq/smallclaims.html"
+  },
+  "DE": {
+      "limit": "$15,000",
+      "url": "http://courts.delaware.gov/jpcourt/"
+  },
+  "FL": {
+      "limit": "$5,000",
+      "url": "http://www.flcourts.org/"
+  },
+  "GA": {
+      "limit": "$15,000",
+      "url": "http://www.georgiacourts.org/magistrate.html"
+  },
+  "HI": {
+      "limit": "$5,000",
+      "url": "http://www.courts.state.hi.us/page_server/SelfHelp/SmallClaims/695F88B9A961B33EAB295F3B7.html"
+  },
+  "ID": {
+      "limit": "$5,000",
+      "url": "http://www.courtselfhelp.idaho.gov/small-claims"
+  },
+  "IL": {
+      "limit": "$10,000",
+      "url": "http://www.ag.state.il.us/consumers/smlclaims.html"
+  },
+  "IN": {
+      "limit": "$6,000",
+      "url": "http://www.in.gov/judiciary/2710.htm"
+  },
+  "IA": {
+      "limit": "$5,000",
+      "url": "http://www.iowacourts.gov/Representing_Yourself/Civil_Law/Small_Claims/"
+  },
+  "KS": {
+      "limit": "$4,000",
+      "url": "http://www.kscourts.org/dstcts/smallclaims.htm"
+  },
+  "KY": {
+      "limit": "$2,500",
+      "url": "http://courts.ky.gov/resources/publicationsresources/Publications/P6SmallClaimsHandbookweb.pdf"
+  },
+  "LA": {
+      "limit": "$5,000",
+      "url": "http://brgov.com/dept/citycourt/"
+  },
+  "ME": {
+      "limit": "$6,000",
+      "url": "http://www.courts.state.me.us/maine_courts/specialized/small_claims/index.shtml"
+  },
+  "MD": {
+      "limit": "$5,000",
+      "url": "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&sqi=2&ved=0CC4QFjAC&url=http%3A%2F%2Fwww.courts.state.md.us%2Flegalhelp%2Fsmallclaims.html&ei=QF69VNDiB_SRsQSlj4GQBA&usg=AFQjCNE5DKWuSxYbgHYG8YWG5_leo5N9yg"
+  },
+  "MA": {
+      "limit": "$7,000",
+      "url": "http://www.mass.gov/ago/consumer-resources/consumer-assistance/small-claims-court.html"
+  },
+  "MI": {
+      "limit": "$5,000",
+      "url": "http://courts.mi.gov/Administration/SCAO/Forms/courtforms/smallclaims/dc84.pdf"
+  },
+  "MN": {
+      "limit": "$10,000",
+      "url": "http://www.mncourts.gov/selfhelp/?page=313"
+  },
+  "MS": {
+      "limit": "$3,500",
+      "url": "http://www.mssc.state.ms.us/trialcourts/justicecourt/justicecourt.html"
+  },
+  "MO": {
+      "limit": "$5,000",
+      "url": "http://www.courts.mo.gov/page.asp?id=704"
+  },
+  "MT": {
+      "limit": "$7,000",
+      "url": "http://doj.mt.gov/consumer/for-consumers/guide-to-small-claims-court"
+  },
+  "NE": {
+      "limit": "$3,500",
+      "url": "http://www.supremecourt.ne.gov/small-claims/"
+  },
+  "NV": {
+      "limit": "$7,500",
+      "url": "http://www.clarkcountycourts.us/lvjc/small-claims.html"
+  },
+  "NH": {
+      "limit": "$7,500",
+      "url": "http://www.courts.state.nh.us/district/claims.htm"
+  },
+  "NJ": {
+      "limit": "$3,000",
+      "url": "http://www.judiciary.state.nj.us/civil/civ-02.htm"
+  },
+  "NM": {
+      "limit": "$10,000",
+      "url": "https://www.nmcourts.gov/othercourts/mag_proc_manual.pdf"
+  },
+  "NY": {
+      "limit": "$5,000",
+      "url": "http://www.nycourts.gov/courts/nyc/smallclaims/"
+  },
+  "NC": {
+      "limit": "$10,000",
+      "url": "http://www.nccourts.org/Courts/Trial/Sclaims/"
+  },
+  "ND": {
+      "limit": "$15,000",
+      "url": "http://www.ndcourts.com/_court/forms/small/forms.htm"
+  },
+  "OH": {
+      "limit": "$3,000",
+      "url": "http://www.ag.state.oh.us/citizen/pubs/smallclaimscourtWEB.pdf"
+  },
+  "OK": {
+      "limit": "$7,500",
+      "url": "http://www.oklahomacounty.org/courtclerk/smallclaims.aspx"
+  },
+  "OR": {
+      "limit": "$10,000",
+      "url": "http://www.osbar.org/public/pamphlets/smallclaims.html"
+  },
+  "PA": {
+      "limit": "$12,000",
+      "url": "http://www.pabar.org/clips/bringingsuitBeforeDJ.pdf"
+  },
+  "RI": {
+      "limit": "$2,500",
+      "url": "http://www.courts.ri.gov/Courts/districtcourt/Pages/Small%20Claims%20Court.aspx"
+  },
+  "SC": {
+      "limit": "$7,500",
+      "url": "http://www.judicial.state.sc.us/selfhelp/FAQMagistrate.pdf"
+  },
+  "SD": {
+      "limit": "$12,000",
+      "url": "http://ujs.sd.gov/Small_Claims/"
+  },
+  "TN": {
+      "limit": "$25,000",
+      "url": "http://tncourts.gov/programs/self-help-center"
+  },
+  "TX": {
+      "limit": "$10,000",
+      "url": "http://www.texasbar.com/Template.cfm?Section=Legal_and_Judicial_System&CONTENTID=3869&TEMPLATE=/ContentManagement/ContentDisplay.cfm"
+  },
+  "UT": {
+      "limit": "$10,000",
+      "url": "http://www.utcourts.gov/howto/smallclaims/"
+  },
+  "VT": {
+      "limit": "$5,000",
+      "url": "http://www.vermontjudiciary.org/gtc/Civil/smallclaims.aspx"
+  },
+  "VA": {
+      "limit": "$5,000",
+      "url": "http://www.courts.state.va.us/resources/small_claims_court_procedures.pdf"
+  },
+  "WA": {
+      "limit": "$5,000",
+      "url": "http://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal"
+  },
+  "WV": {
+      "limit": "$5,000",
+      "url": "http://www.state.wv.us/wvsca/magistrate.htm"
+  },
+  "WI": {
+      "limit": "$10,000",
+      "url": "http://www.wicourts.gov/services/public/selfhelp/smallclaims.htm"
+  },
+  "WY": {
+      "limit": "$6,000",
+      "url": "https://www.courts.state.wy.us/Documents/Forms/CC/CCLAR/CCLAR-SCOnlineFilingInstructions.pdf"
+  }
+}
+});
+election.labels();
+</script>
+</body>
+</html>

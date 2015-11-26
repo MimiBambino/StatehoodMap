@@ -8,10 +8,16 @@
         top: 10px;
         left: 10px;
         padding: 5px;
-        border: solid 3px gray
+        border: solid 3px gray;
     }
+    /*path.datamaps-subunit*/
+    .grey {
+        fill: rgb(231,235,237);
+    }
+
 </style>
 <body>
+  <!-- Load Firebase, D3.js, topojson and Map script -->
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -19,15 +25,26 @@
 <div id="year"></div>
 <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
 <script>
-var year = 1787;
+// Declare global variables.
+var stopYears = [];
+var startYear = 1787;
 var States;
+var Amendments;
+var counter = 0;
+
+// Fetch Firebase datasets.
 var ref = new Firebase('https://statesdata.firebaseio.com');
 ref.on('value', function(data) {
   States = data.val();
-  dataViz(States)}, function (e) {
-  console.log("The read failed: " + e.code);
+  var Amnd = new Firebase('https://amendments.firebaseio.com/');
+  Amnd.on('value', function(data){
+    Amendments = data.val();
+    dataViz()}, function (e) {
+        console.log("The read failed: " + e.code);
+    });
 });
 
+// Load USA map from the datamaps script.
 var map = new Datamap({
     element: document.getElementById('container'),
     scope: 'usa'
@@ -35,16 +52,83 @@ var map = new Datamap({
 
 map.labels({"labelColor": "#444"});
 
+// Main Visualization function.  This function calls all other fuctions in the appropriate order.
 var dataViz = function(data) {
-    d3.select("#year").html(year);
+    appendYear();
+    for (var i = 0; i < Amendments.length; i++) {
+        stopYears.push(Amendments[i].Year);
+    }
+    //for (var i = 0; i < Amendments.length; i++) {
+        incrementYear(startYear, [stopYears[i]]);
+        startYear = stopYears[i];
+        showRatifiers(startYear);
+
+    //}
+    //incrementYear(startYear, [1788]);
+    //play();
+};
+
+// Append the year box on the page.
+var appendYear = function() {
+    var qSVG = d3.select("#year").append("svg").attr("width", 100).attr("height", 30).attr("class", "counter");
+};
+
+// Changes the year in the year box.
+var incrementYear = function(start, endList) {
+    var qSVG = d3.select("svg.counter");
+    // Adapted from http://jsfiddle.net/c5YVX/8/
+    qSVG.selectAll(".txt")
+        .data(endList)
+        .enter()
+        .append("text")
+        .text(start)
+        .attr("class", "txt")
+        .attr("x", 15)
+        .attr("y", 30)
+        .transition()
+        .duration(1000)
+        .tween("text", function(d) {
+            var i = d3.interpolate(this.textContent, d),
+                prec = (d + "").split("."),
+                round = (prec.length > 1) ? Math.pow(10, prec[1].length) : 1;
+            return function(t) {
+
+                this.textContent = Math.round(i(t) * round) / round;
+                updateMap(this.textContent);
+            };
+        });
+    d3.selectAll("path.datamaps-subunit").classed("grey", false);
+}
+
+// Add the appropriate color to states given a year to indicate that the state has been admitted to the union. Called from within the tween() function.
+var updateMap = function(thisYear) {
     for (var i = 0; i < States.length; i++) {
-        if (States[i].Admitted <= year) {
+        if (States[i].Admitted <= thisYear) {
             var abbr = States[i].Abbr;
             var selector = "path." + abbr;
-            d3.select(selector).style("fill", "red");
+            d3.select(selector).style("fill", "#99CCFF");
         }
     }
 };
+
+// Given an amendment, changes the color of the state to reflect if the state ratified the amendment.
+var showRatifiers = function(year) {
+    var ratifiers = Amendments[counter].Ratifiers;
+    console.log(ratifiers);
+    for (var i = 0; i < ratifiers.length; i++) {
+        var abbr = ratifiers[i];
+        var selector = "path." + abbr;
+        d3.select(selector).style("fill", "red");
+    }
+    counter++;
+};
+
+// Given an amendment, changes the color of the state to reflect if the state rejected the amendment.
+var showRejectors = function() {};
+
+// Given an amendment, changes the color of the state to reflect if the state took no action on the amendment.
+var showNoAction = function() {};
+
 </script>
 </body>
 </html>

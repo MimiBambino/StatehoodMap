@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<style>
+    #year {
+        font-size: 2em;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        padding: 5px;
+        border: solid 3px gray;
+    }
+    /*path.datamaps-subunit*/
+    .grey {
+        fill: rgb(231,235,237);
+    }
+    #play {
+        position: fixed;
+        left: 150px;
+        top: 20px;
+    }
+</style>
+<body>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="datamaps.usa.min.js"></script>
+<div id="year"></div><div id="play"></div>
+<div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
+<script>
+var year = 1787;
+var States;
+var start_val = 1787,
+    duration = 5000,
+    end_val = [1959];
+
+var ref = new Firebase('https://statesdata.firebaseio.com');
+ref.on('value', function(data) {
+  States = data.val();
+  dataViz(States)}, function (e) {
+  console.log("The read failed: " + e.code);
+});
+
+var map = new Datamap({
+    element: document.getElementById('container'),
+    scope: 'usa'
+});
+
+map.labels({"labelColor": "#444"});
+
+var dataViz = function(data) {
+    d3.select("#play")
+        .append("svg")
+        .attr("width", 50)
+        .attr("height", 50)
+        .append("polygon")
+        .attr("fill", "black")
+        .attr("stroke", "gray")
+        .attr("stroke-width", "2")
+        .attr("points", "0,0 0,30 30,15");
+    d3.select("#play")
+        .on({"click": function(){
+            d3.selectAll("path.datamaps-subunit").classed("grey", true);
+            console.log("click");
+            play();}
+        });
+      // Adapted from http://jsfiddle.net/c5YVX/8/
+    var qSVG = d3.select("#year").append("svg").attr("width", 100).attr("height", 30).attr("class", "counter");
+    play();
+    // qSVG.selectAll(".txt")
+    //     .data(end_val)
+    //     .enter()
+    //     .append("text")
+    //     .text(States[0].Admitted)
+    //     .attr("class", "txt")
+    //     .attr("x", 15)
+    //     .attr("y", 30)
+    //     .transition()
+    //     .duration(1000)
+    //     .tween("text", function(d) {
+    //         var i = d3.interpolate(this.textContent, d),
+    //             prec = (d + "").split("."),
+    //             round = (prec.length > 1) ? Math.pow(10, prec[1].length) : 1;
+    //             console.log(d);
+    //         return function(t) {
+
+    //             this.textContent = Math.round(i(t) * round) / round;
+    //             updateMap(this.textContent);
+    //         };
+    //     });
+    // var updateMap = function(thisYear) {
+    //     for (var i = 0; i < States.length; i++) {
+    //         if (States[i].Admitted <= thisYear) {
+    //             var abbr = States[i].Abbr;
+    //             var selector = "path." + abbr;
+    //             d3.select(selector).style("fill", "red");
+    //         }
+    //     }
+    // };
+};
+var play = function() {
+    var qSVG = d3.select("svg.counter");
+    qSVG.selectAll(".txt")
+        .data(end_val)
+        .enter()
+        .append("text")
+        .text(States[0].Admitted)
+        .attr("class", "txt")
+        .attr("x", 15)
+        .attr("y", 30)
+        .transition()
+        .duration(10000)
+        .tween("text", function(d) {
+            var i = d3.interpolate(this.textContent, d),
+                prec = (d + "").split("."),
+                round = (prec.length > 1) ? Math.pow(10, prec[1].length) : 1;
+            return function(t) {
+
+                this.textContent = Math.round(i(t) * round) / round;
+                updateMap(this.textContent);
+            };
+        });
+    d3.selectAll("path.datamaps-subunit").classed("grey", false);
+}
+var updateMap = function(thisYear) {
+        for (var i = 0; i < States.length; i++) {
+            if (States[i].Admitted <= thisYear) {
+                var abbr = States[i].Abbr;
+                var selector = "path." + abbr;
+                d3.select(selector).style("fill", "red");
+            }
+        }
+    };
+
+
+</script>
+</body>
+</html>

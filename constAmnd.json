@@ -1,0 +1,133 @@
+[{
+    "Name": "Constitution",
+    "Year": 1788,
+    "Summary": "The supreme law of the United States of America, the Constitution delineates the framework for the federal government, including the doctrine of Separation of Powers. The Constitution has 7 Articles: <ul><li>Article I: Creates a Congress made up of a Senate and House of Representatives. Grants Congress legislative power.</li><li>Article II: Creates the offices of President and Vice President. Grants the president specific executive powers.</li><li>Article III: Establishes the Judicial Branch and grants the Judiciary jurisdiction.</li><li>Article IV: Details the states rights and obligations between each other and with respect to the federal government.</li><li>Article V: Provides the procedure to amend the Constitution.</li><li>Articles VI: Declares the Constitution to be the supreme law of the United States</li><li>Article VII: Establishes the procedure for ratifying the Constitution.</li>",
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI"],
+    "Months To Ratify": 9
+},{
+    "Name": "Bill of Rights",
+    "Year": 1791,
+    "Summary": "<p>The Bill of Rights are the first 10 amendments to the Constitution. The amendments were ratified just two years after the ratification of the Consitution in response to concerns regarding Constitutional protection of individual freedoms.  The Bill of Rights includes many specific limitations on governmental power.</p> <p>It was written by <a href='https://www.whitehouse.gov/1600/presidents/jamesmadison'>James Madison</a>, who was strongly influenced by the <a href='https://en.wikipedia.org/wiki/Virginia_Declaration_of_Rights'>Virginia Declaration of Rights</a> written by <a href='https://en.wikipedia.org/wiki/George_Mason'>George Mason</a>.</p>",
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT"],
+    "Rejectors": [],
+    "Months To Ratify": 26
+},{
+    "Name": "11th Amendment",
+    "Summary": "Makes states immune from suits from out-of-state citizens and foreigners not living within the state borders; lays the foundation for sovereign immunity.",
+    "Year": 1795,
+    "Ratifiers": ["DE", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY"],
+    "Rejectors": [],
+    "Months to Ratify": 11
+},{
+    "Name": "12th Amendment",
+    "Summary": "Revises Presidential election procedures, namely that the Vice-President will be a separate electable position than President. This opens the door to running mates.",
+    "Year": 1804,
+    "Ratifiers": ["PA", "NJ", "GA", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH"],
+    "Rejectors": ["DE", "CT"],
+    "Months to Ratify": 6
+},{
+    "Name": "13th Amendment",
+    "Summary": "Abolishes slavery.",
+    "Year": 1865,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV"],
+    "Rejectors": [],
+    "Months to Ratify": 10
+},{
+    "Name": "14th Amendment",
+    "Summary": "Defines citizenship, limits the individual states' powers with respect to citizens via the Privileges or Immunities Clause, the Due Process Clause, the Equal Protection Clause.",
+    "Year": 1868,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE"],
+    "Rejectors": [],
+    "Months to Ratify": 24
+},{
+    "Name": "15th Amendment",
+    "Summary": "Prohibits the denial of the right to vote based on race, color, or previous condition of servitude.",
+    "Year": 1870,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE"],
+    "Rejectors": [],
+    "Months to Ratify": 11
+},{
+    "Name": "16th Amendment",
+    "Summary": "Gives Congress power to levy an income tax.",
+    "Year": 1913,
+    "Ratifiers": ["DE", "NJ", "GA", "MA", "MD", "SC", "NH", "NY", "NC", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "OK", "NM", "AZ"],
+    "Rejectors": ["CT", "VA", "RI", "UT"],
+    "Months to Ratify": 42
+},{
+    "Name": "17th Amendment",
+    "Summary": "Establishes the direct election of United States Senators by popular vote.  Under Article I of the Constitution, members of the state legislatures had previously chosen United States Senators.",
+    "Year": 1913,
+    "Ratifiers": ["DE", "PA", "NJ", "CT", "MA", "MD", "NH", "NY", "NC", "RI", "VT", "TN", "OH", "LA", "IN", "IL", "AL", "ME", "MO", "AR", "MI", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "OK", "NM", "AZ"],
+    "Rejectors": ["UT"],
+    "Months to Ratify": 10
+},{
+    "Name": "18th Amendment",
+    "Summary": "Prohibits the manufacture, transport, or sale of alcohol within the United States.",
+    "Year": 1919,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "UT", "OK", "NM", "AZ"],
+    "Rejectors": ["RI", "CT"],
+    "Months to Ratify": 12
+},{
+    "Name": "19th Amendment",
+    "Summary": "Prohibits the denial of the right to vote based on sex.",
+    "Year": 1920,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "UT", "OK", "NM", "AZ"],
+    "Rejectors": [],
+    "Months to Ratify": 14
+},{
+    "Name": "20th Amendment",
+    "Summary": "Changes the date on which the terms of the President and Vice President (January 20) and Senators and Representatives (January 3) end and begin.",
+    "Year": 1933,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "UT", "OK", "NM", "AZ"],
+    "Rejectors": [],
+    "Months to Ratify": 10
+},{
+    "Name": "21st Amendment",
+    "Summary": "Repeals the 18th Amendment (Prohibition).",
+    "Year": 1933,
+    "Ratifiers": ["DE", "PA", "NJ", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "RI", "VT", "KY", "TN", "OH", "IN", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "WV", "NV", "CO", "MT", "WA", "ID", "WY", "UT", "NM", "AZ"],
+    "Rejectors": ["SC"],
+    "Months to Ratify": 9
+},{
+    "Name": "22nd Amendment",
+    "Summary": "Limits presidents to two terms.",
+    "Year": 1951,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MD", "SC", "NH", "VA", "NY", "NC", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "NV", "NE", "CO", "ND", "SD", "MT", "ID", "WY", "UT", "NM"],
+    "Rejectors": ["MA", "OK"],
+    "Months to Ratify": 47
+},{
+    "Name": "23rd Amendment",
+    "Summary": "Grants the District of Columbia electors in the Electoral College.",
+    "Year": 1961,
+    "Ratifiers": ["DE", "PA", "NJ", "CT", "MA", "MD", "NH", "NY", "RI", "VT", "TN", "OH", "IN", "IL", "AL", "ME", "MO", "MI", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "UT", "OK", "NM", "AZ", "AK", "HI"],
+    "Rejectors": ["AR"],
+    "Months to Ratify": 9
+},{
+    "Name": "24th Amendment",
+    "Summary": "Prohibits the denial of the right to vote due to the non-payment of taxes.",
+    "Year": 1964,
+    "Ratifiers": ["DE", "PA", "NJ", "CT", "MA", "MD", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "IN", "IL", "AL", "ME", "MO", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "UT", "NM", "AK", "HI"],
+    "Rejectors": ["MS"],
+    "Months to Ratify": 16
+},{
+    "Name": "25th Amendment",
+    "Summary": "Provides Presidential and Vice-Presidential succession procedures.",
+    "Year": 1967,
+    "Ratifiers": ["DE", "PA", "NJ", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "MT", "WA", "ID", "WY", "UT", "OK", "NM", "AZ", "AK", "HI"],
+    "Rejectors": [],
+    "Months to Ratify": 19
+},{
+    "Name": "26th Amendment",
+    "Summary": "Prohibits the denial of the right to vote of citizens, eighteen years of age or older, on account of age.",
+    "Year": 1971,
+    "Ratifiers": ["DE", "PA", "NJ", "GA", "CT", "MA", "MD", "SC", "NH", "VA", "NY", "NC", "RI", "VT", "KY", "TN", "OH", "LA", "IN", "MS", "IL", "AL", "ME", "MO", "AR", "MI", "FL", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "NV", "NE", "CO", "ND", "SD", "MT", "WA", "ID", "WY", "UT", "OK", "NM", "AZ", "AK", "HI"],
+    "Rejectors": [],
+    "Months to Ratify": 3
+},{
+    "Name": "27th Amendment",
+    "Summary": "Delays laws affecting Congressional salary from taking effect until after the next election of representatives.",
+    "Year": 1992,
+    "Ratifiers": ["DE", "NJ", "GA", "CT", "MD", "SC", "NH", "VA", "NC", "RI", "VT", "TN", "OH", "LA", "IN", "IL", "AL", "ME", "MO", "AR", "MI", "TX", "IA", "WI", "CA", "MN", "OR", "KS", "WV", "CO", "MT", "WA", "ID", "WY", "OK", "AZ", "AK", "HI"],
+    "Rejectors": [],
+    "Months to Ratify": 2431
+}]
