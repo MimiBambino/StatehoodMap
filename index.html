@@ -2,10 +2,35 @@
 <html>
 <meta charset="utf-8">
 <style>
+    .nav {
+        width: 100%;
+        left:0;
+        right:0;
+        position: fixed;
+        top: 0;
+        height: 70px;
+        background-color: rgba(100,100,100,.7);
+    }
+    ul {
+        list-style: none;
+        color: white;
+    }
+
+    li {
+        display: inline;
+        font-size: 1.9em;
+        padding: 10px 30px;
+        margin: 30px 20px;
+    }
+
+    li:hover {
+        color: #462EC3;
+    }
+
     #year {
         font-size: 2em;
         position: fixed;
-        top: 10px;
+        top: 100px;
         left: 10px;
         padding: 5px;
         border: solid 3px gray;
@@ -14,37 +39,44 @@
     .grey {
         fill: rgb(231,235,237);
     }
-
+    #play {
+        position: fixed;
+        left: 150px;
+        top: 20px;
+    }
+    #container {
+        top: 100px;
+        left: 100px;
+    }
 </style>
 <body>
-  <!-- Load Firebase, D3.js, topojson and Map script -->
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="datamaps.usa.min.js"></script>
-<div id="year"></div>
-<div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
+    <div class="nav">
+        <ul>
+            <li>Portfolio</li>
+            <li>Statehood Map</li>
+            <li>Small Claims Map</li>
+        </ul>
+    </div>
+    <div id="year"></div>
+    <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
 <script>
-// Declare global variables.
-var stopYears = [];
-var startYear = 1787;
+var year = 1787;
 var States;
-var Amendments;
-var counter = 0;
+var start_val = 1787,
+    duration = 5000,
+    end_val = [1959];
 
-// Fetch Firebase datasets.
 var ref = new Firebase('https://statesdata.firebaseio.com');
 ref.on('value', function(data) {
   States = data.val();
-  var Amnd = new Firebase('https://amendments.firebaseio.com/');
-  Amnd.on('value', function(data){
-    Amendments = data.val();
-    dataViz()}, function (e) {
-        console.log("The read failed: " + e.code);
-    });
+  dataViz(States)}, function (e) {
+  console.log("The read failed: " + e.code);
 });
 
-// Load USA map from the datamaps script.
 var map = new Datamap({
     element: document.getElementById('container'),
     scope: 'usa'
@@ -52,41 +84,23 @@ var map = new Datamap({
 
 map.labels({"labelColor": "#444"});
 
-// Main Visualization function.  This function calls all other fuctions in the appropriate order.
 var dataViz = function(data) {
-    appendYear();
-    for (var i = 0; i < Amendments.length; i++) {
-        stopYears.push(Amendments[i].Year);
-    }
-    //for (var i = 0; i < Amendments.length; i++) {
-        incrementYear(startYear, [stopYears[i]]);
-        startYear = stopYears[i];
-        showRatifiers(startYear);
-
-    //}
-    //incrementYear(startYear, [1788]);
-    //play();
-};
-
-// Append the year box on the page.
-var appendYear = function() {
+      // Adapted from http://jsfiddle.net/c5YVX/8/
     var qSVG = d3.select("#year").append("svg").attr("width", 100).attr("height", 30).attr("class", "counter");
+    play();
 };
-
-// Changes the year in the year box.
-var incrementYear = function(start, endList) {
+var play = function() {
     var qSVG = d3.select("svg.counter");
-    // Adapted from http://jsfiddle.net/c5YVX/8/
     qSVG.selectAll(".txt")
-        .data(endList)
+        .data(end_val)
         .enter()
         .append("text")
-        .text(start)
+        .text(States[0].Admitted)
         .attr("class", "txt")
         .attr("x", 15)
         .attr("y", 30)
         .transition()
-        .duration(1000)
+        .duration(20000)
         .tween("text", function(d) {
             var i = d3.interpolate(this.textContent, d),
                 prec = (d + "").split("."),
@@ -99,35 +113,16 @@ var incrementYear = function(start, endList) {
         });
     d3.selectAll("path.datamaps-subunit").classed("grey", false);
 }
-
-// Add the appropriate color to states given a year to indicate that the state has been admitted to the union. Called from within the tween() function.
 var updateMap = function(thisYear) {
-    for (var i = 0; i < States.length; i++) {
-        if (States[i].Admitted <= thisYear) {
-            var abbr = States[i].Abbr;
-            var selector = "path." + abbr;
-            d3.select(selector).style("fill", "#99CCFF");
+        for (var i = 0; i < States.length; i++) {
+            if (States[i].Admitted <= thisYear) {
+                var abbr = States[i].Abbr;
+                var selector = "path." + abbr;
+                d3.select(selector).style("fill", "red");
+            }
         }
-    }
-};
+    };
 
-// Given an amendment, changes the color of the state to reflect if the state ratified the amendment.
-var showRatifiers = function(year) {
-    var ratifiers = Amendments[counter].Ratifiers;
-    console.log(ratifiers);
-    for (var i = 0; i < ratifiers.length; i++) {
-        var abbr = ratifiers[i];
-        var selector = "path." + abbr;
-        d3.select(selector).style("fill", "red");
-    }
-    counter++;
-};
-
-// Given an amendment, changes the color of the state to reflect if the state rejected the amendment.
-var showRejectors = function() {};
-
-// Given an amendment, changes the color of the state to reflect if the state took no action on the amendment.
-var showNoAction = function() {};
 
 </script>
 </body>
